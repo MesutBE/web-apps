@@ -29,7 +29,7 @@ const writeFileCallback = (err) => {
     return;
   }
 
-  const readFileCallback = (err, fileContent) => {
+const readFileCallback = (err, fileContent) => {
     if (err) {
       log(4, err);
       return;
@@ -37,13 +37,13 @@ const writeFileCallback = (err) => {
 
     assert.strictEqual(fileContent, newFileContents);
     log(4, 'pass!');
-  };
+};
 
-  fs._(_, _, _);
+  fs.readFile(FILE_PATH, "utf-8", readFileCallback);
   log(3, 'reading file ...');
 };
 
-fs._(_, _, _);
+fs.writeFile(FILE_PATH, newFileContents, writeFileCallback);
 log(2, 'writing file ...');
 
 
