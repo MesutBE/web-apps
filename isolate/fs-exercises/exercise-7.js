@@ -31,14 +31,34 @@ log(0.2, ORIGINAL_TEXT);
 // 2. refactor to asynchronous
 
 log(1, 'appending to file ...');
-fs._(_, _);
+fs.appendFileSync(SOURCE_PATH, ORIGINAL_TEXT);
 
-log(2, 'appending to file ...');
-fs._(_, _);
+const callBackAppend = (err) => {
+  if (err) {
+    log(5, err);
+    return;
+  }
+
+  log(2, 'appending to file ...');
+}
+
+log(2, '...');
+fs.appendFile(SOURCE_PATH, ORIGINAL_TEXT, callBackAppend);
+
+const callbackReadFile = (err, data) => {
+  if (err) {
+    log(5, err);
+    return;
+  }
+
+  log(4, data);
+
+  assert.strictEqual(data, ORIGINAL_TEXT + ORIGINAL_TEXT + ORIGINAL_TEXT);
+  log(5, 'pass!');
+}
 
 log(1, 'reading file ...');
-const newText = fs._(SOURCE_PATH, _);
-log(4, newText);
+fs.readFile(SOURCE_PATH, 'utf-8', callbackReadFile);
+log(4, '...');
 
-assert.strictEqual(newText, ORIGINAL_TEXT + ORIGINAL_TEXT + ORIGINAL_TEXT);
-log(5, 'pass!');
+

@@ -37,24 +37,24 @@ if (process.argv.includes('-h')) {
   process.exit(0);
 };
 
-const command = _;
-const fileName = _;
+const command = process.argv[2];
+const fileName = process.argv[3];
 
-if (_) {
+if (!command) {
   log('1.a', 'a command is required, exiting');
   process.exit(0);
 }
 log('1.b', 'command: ' + command);
 
 
-if (command === _) {
+if (command === 'list') {
   log('3', 'reading filenames ...');
-  const fileNames = fs.readdirSync(_);
+  const fileNames = fs.readdirSync(__dirname, 'utf-8');
   log('4', fileNames);
   process.exit(0)
 };
 
-if (_) {
+if (!fileName) {
   log('2.a', 'a file name is required, exiting');
   process.exit(0);
 }
@@ -62,21 +62,23 @@ log('2.b', 'fileName: ' + fileName);
 
 
 
-if (_) {
-  log('3.a', 'declaring _');
-  const _ = (err, contents) => {
-    _;
+if (command === 'read') {
+  log('3.a', 'declaring readFileCallback');
+  const readFileCallback = (err, contents) => {
+    if (err) { console.error(err) };
+    
+    log('5.a', contents)
   };
-  fs._(__dirname + '/' + fileName, 'utf-8', _);
-  log('4.a', '_ from ' + fileName + ' ...');
+  fs.readFile(__dirname + '/' + fileName, 'utf-8', readFileCallback);
+  log('4.a', 'reading from ' + fileName + ' ...');
 
-} else if (_) {
-  log('3.b', 'declaring _');
-  const _ = (err) => {
-    _;
+} else if (command === 'unlink') {
+  log('3.b', 'declaring call back function');
+  const callbackUnlink = (err) => {
+    if (err) { console.error(err) };;
   };
-  fs._(__dirname + '/' + fileName, _);
-  log('4.b', '_ ' + fileName + ' ...');
+  fs.unlink(__dirname + '/' + fileName, callbackUnlink);
+  log('4.b', 'removed ' + fileName + ' ...');
 
 } else {
   log('3.c', 'unknown command: ' + command);

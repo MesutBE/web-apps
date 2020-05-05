@@ -30,7 +30,16 @@ const objectToSave = {
 log(1, objectToSave);
 
 // https://javascript.info/json#json-stringify
-const stringToSave = _._(_, _, _);
+
+const stringToSave = JSON.stringify(objectToSave, ['todoText', 'flamingo', 'completed'], '  ');
+
+// const stringToSave = JSON.stringify(objectToSave, function (key, val) {
+//   if (typeof val === 'function') {
+//     return objectToSave.render(); // implicitly `toString` it
+//   }
+//   return val;
+// });
+
 log(2, stringToSave);
 
 // sync
@@ -49,7 +58,7 @@ const readFileCallback = (err, fileText) => {
 
   const parsedFileContents = JSON.parse(fileText);
   log(6, parsedFileContents);
-  assert.deepStrictEqual(parsedFileContents, _);
+  assert.deepStrictEqual(parsedFileContents, objectToSave);
 
   log(7, 'pass!');
 };
