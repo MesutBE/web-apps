@@ -47,8 +47,8 @@ const readFileCallback = (err, fileText) => {
     log(6, parsedFileContents);
     assert.deepStrictEqual(parsedFileContents, objectToSave);
 
-    log(7, 'pass!');
-};
+    log(7, '\033[32mpass!\x1b[0m');
+  };
 
   fs.readFile(FILE_PATH, "utf-8", readFileCallback);
   log(4, 'reading file ...');
