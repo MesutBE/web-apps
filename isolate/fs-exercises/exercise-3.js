@@ -36,8 +36,8 @@ const readFileCallback = (err, fileContent) => {
     }
 
     assert.strictEqual(fileContent, newFileContents);
-    log(4, 'pass!');
-};
+    log(4, '\033[32mpass!\x1b[0m');
+  };
 
   fs.readFile(FILE_PATH, "utf-8", readFileCallback);
   log(3, 'reading file ...');

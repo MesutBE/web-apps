@@ -61,4 +61,6 @@ log(1, 'reading file ...');
 fs.readFile(SOURCE_PATH, 'utf-8', callbackReadFile);
 log(4, '...');
 
+assert.strictEqual(newText, ORIGINAL_TEXT + ORIGINAL_TEXT + ORIGINAL_TEXT);
+log(5, '\033[32mpass!\x1b[0m');
 
