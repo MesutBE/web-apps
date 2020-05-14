@@ -2,6 +2,7 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const querystring = require('querystring');
 const path = require('path');
 const config = require('./config');
 const logger = require('./middleware/logger');
@@ -17,7 +18,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.raw({ type: 'text/plain' }));
 
 // parse queries
-// _;
+// app.set('query parser', (queryString) => {
+//     return new URLSearchParams(queryString)
+// });
+
 
 // statically serve the frontend
 app.use('/', express.static(path.join(__dirname, 'public')));
@@ -25,8 +29,9 @@ app.use('/', express.static(path.join(__dirname, 'public')));
 // declare the routes
 
 app.post('/body', (req, res) => {
-    const bodyValue = req.body.text;
+    const bodyValue = JSON.stringify(req.body); //req.body.value;
 
+    // const bodyValue = querystring.stringify(req.query.value);
     console.log(`body value: ${bodyValue}`);
 
     const responseData = {
@@ -36,7 +41,7 @@ app.post('/body', (req, res) => {
 });
 
 app.post('/param/:paramVal', (req, res) => {
-    const paramValue = req.params.paramVal;
+    const paramValue = JSON.stringify(req.params); //req.params.paramVal;
 
     console.log(`param value: ${paramValue}`);
 
@@ -46,10 +51,10 @@ app.post('/param/:paramVal', (req, res) => {
     res.json(responseData);
 });
 
-app.post('/:queryVal', (req, res) => {
-    const queryValue = req.query.queryVal;
+app.post('/query', (req, res) => {
+    const queryValue = JSON.stringify(req.query); //req.query.value;
 
-    console.log(`param value: ${queryValue}`);
+    console.log(`query value: ${queryValue}`);
 
     const responseData = {
         queryValue,
