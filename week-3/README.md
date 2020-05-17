@@ -60,7 +60,7 @@ Practice refactoring small Express apps from single-file servers into multiple f
 
 ### Isolate
 
-These exercises have a server running from a single file (`index.js`), your task is to refactor them to match the file structure in the examples.
+These exercises have a server running from a single file (`index.js`), your task is to refactor them to match the file structure in the examples. Bonust points: convert all callback and promise code that you see into async/await.
 
 - Exercises
   - [param/query/body](../isolate/refactored-exercise-param-query-body)
@@ -91,6 +91,8 @@ Revisit the text editor app you studied last week, this time refactoring the ser
 ### Project
 
 #### `courses-web-app`
+
+- [the `courses-web-app` template repo](https://github.com/HackYourFutureBelgium/courses-web-app)
 
 Again with the refactors?! This week's project is refactor the API from [Build RESTful APIs with Node and Express](https://www.youtube.com/watch?v=pKd0Rpw7O48) into a full web app. To help you get started, you can use [the `courses-web-app` template repo](https://github.com/HackYourFutureBelgium/courses-web-app).
 
